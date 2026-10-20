@@ -1,0 +1,457 @@
+/* Cores da marca CodeTrix: roxo #D580FF, verde #39FF14, preto #1A1A1A.
+   No tema claro o roxo escurece para dar contraste de leitura. */
+:root {
+	--fundo: #ffffff;
+	--fundo-suave: #f6f4f9;
+	--texto: #1a1a1a;
+	--texto-suave: #5d5866;
+	--borda: #e5e1ec;
+	--destaque: #7b2cbf;
+	--destaque-forte: #5a189a;
+	--verde: #39ff14;
+	--sinal-fundo: #1a1a1a;
+	--aviso: #fff4d6;
+	--aviso-texto: #6b4e00;
+	--sombra-foco: 0 0 0 3px color-mix(in srgb, var(--destaque) 35%, transparent);
+
+	--fonte: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+	--fonte-codigo: ui-monospace, 'Cascadia Code', 'SF Mono', Consolas, 'Liberation Mono', monospace;
+	--largura: 44rem;
+	color-scheme: light;
+}
+
+:root[data-tema='escuro'] {
+	--fundo: #1a1a1a;
+	--fundo-suave: #242326;
+	--texto: #ececec;
+	--texto-suave: #a9a3b2;
+	--borda: #35333a;
+	--destaque: #d580ff;
+	--destaque-forte: #e7b3ff;
+	--sinal-fundo: #000000;
+	--aviso: #3a3000;
+	--aviso-texto: #ffe08a;
+	color-scheme: dark;
+}
+
+/* Sem JavaScript, segue o tema do sistema */
+@media (prefers-color-scheme: dark) {
+	:root:not([data-tema]) {
+		--fundo: #1a1a1a;
+		--fundo-suave: #242326;
+		--texto: #ececec;
+		--texto-suave: #a9a3b2;
+		--borda: #35333a;
+		--destaque: #d580ff;
+		--destaque-forte: #e7b3ff;
+		--sinal-fundo: #000000;
+		color-scheme: dark;
+	}
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	margin: 0;
+	background: var(--fundo);
+	color: var(--texto);
+	font-family: var(--fonte);
+	font-size: 1.0625rem;
+	line-height: 1.7;
+	text-rendering: optimizeLegibility;
+}
+
+.pular {
+	position: absolute;
+	left: -999px;
+}
+.pular:focus {
+	left: 1rem;
+	top: 1rem;
+	padding: 0.5rem 1rem;
+	background: var(--fundo);
+	z-index: 10;
+}
+
+a {
+	color: var(--destaque);
+	text-underline-offset: 0.18em;
+	text-decoration-thickness: 1px;
+}
+a:hover {
+	color: var(--destaque-forte);
+	text-decoration-thickness: 2px;
+}
+:focus-visible {
+	outline: none;
+	box-shadow: var(--sombra-foco);
+	border-radius: 4px;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	line-height: 1.25;
+	letter-spacing: -0.01em;
+	text-wrap: balance;
+}
+h1 {
+	font-size: clamp(1.8rem, 5vw, 2.4rem);
+	margin: 0 0 0.75rem;
+}
+
+/* ---------- Estrutura ---------- */
+
+.cabecalho,
+main,
+.rodape {
+	width: 100%;
+	max-width: var(--largura);
+	margin: 0 auto;
+	padding-inline: 1rem;
+}
+
+.cabecalho {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 0.75rem 1.5rem;
+	padding-block: 1.25rem;
+	border-bottom: 1px solid var(--borda);
+}
+
+.marca {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.6rem;
+	color: var(--texto);
+	text-decoration: none;
+	font-size: 1.15rem;
+}
+.marca:hover {
+	color: var(--texto);
+}
+.marca strong {
+	color: var(--destaque);
+}
+.marca-sinal {
+	display: inline-grid;
+	place-items: center;
+	padding: 0.15rem 0.45rem;
+	border-radius: 6px;
+	background: var(--sinal-fundo);
+	color: var(--verde);
+	font-family: var(--fonte-codigo);
+	font-size: 0.85rem;
+	font-weight: 700;
+}
+
+.cabecalho nav {
+	display: flex;
+	align-items: center;
+	gap: 1.1rem;
+}
+.cabecalho nav a {
+	color: var(--texto-suave);
+	text-decoration: none;
+}
+.cabecalho nav a:hover,
+.cabecalho nav a[aria-current='page'] {
+	color: var(--destaque);
+}
+
+.botao-tema {
+	display: inline-grid;
+	place-items: center;
+	width: 2.25rem;
+	height: 2.25rem;
+	border: 1px solid var(--borda);
+	border-radius: 50%;
+	background: transparent;
+	color: var(--texto-suave);
+	cursor: pointer;
+}
+.botao-tema:hover {
+	color: var(--destaque);
+	border-color: var(--destaque);
+}
+
+main {
+	padding-block: 2.5rem 3rem;
+	min-height: 60vh;
+}
+
+.rodape {
+	padding-block: 1.5rem 2.5rem;
+	border-top: 1px solid var(--borda);
+	color: var(--texto-suave);
+	font-size: 0.9rem;
+}
+.rodape p {
+	margin: 0.35rem 0;
+}
+.rodape-links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+/* ---------- Listas ---------- */
+
+.abertura {
+	margin-bottom: 2.5rem;
+}
+.abertura p {
+	color: var(--texto-suave);
+	font-size: 1.1rem;
+}
+
+.lista-posts,
+.lista-pilares,
+.lista-tags {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.lista-posts li,
+.lista-pilares li {
+	padding-block: 1.25rem;
+	border-top: 1px solid var(--borda);
+}
+.lista-posts h2,
+.lista-pilares h2 {
+	font-size: 1.3rem;
+	margin: 0 0 0.35rem;
+}
+.lista-posts h2 a,
+.lista-pilares h2 a {
+	color: var(--texto);
+	text-decoration: none;
+}
+.lista-posts h2 a:hover,
+.lista-pilares h2 a:hover {
+	color: var(--destaque);
+}
+.lista-posts p,
+.lista-pilares p {
+	margin: 0.25rem 0;
+}
+.lista-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1.25rem;
+}
+
+.meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.5rem;
+	color: var(--texto-suave);
+	font-size: 0.9rem;
+}
+.vazio {
+	color: var(--texto-suave);
+	font-style: italic;
+}
+
+.selo-rascunho,
+.aviso-rascunho {
+	background: var(--aviso);
+	color: var(--aviso-texto);
+	border-radius: 4px;
+	font-size: 0.8rem;
+	font-weight: 600;
+}
+.selo-rascunho {
+	padding: 0 0.4rem;
+}
+.aviso-rascunho {
+	padding: 0.5rem 0.75rem;
+}
+
+.pagina-cabecalho {
+	margin-bottom: 1.5rem;
+}
+
+/* ---------- Post ---------- */
+
+.post-cabecalho {
+	margin-bottom: 2.5rem;
+	padding-bottom: 1.5rem;
+	border-bottom: 1px solid var(--borda);
+}
+.post-pilar {
+	margin: 0 0 0.5rem;
+	font-size: 0.9rem;
+	font-weight: 600;
+}
+.post-pilar a {
+	text-decoration: none;
+}
+.post-descricao {
+	margin: 0 0 1.25rem;
+	color: var(--texto-suave);
+	font-size: 1.15rem;
+}
+.post-datas {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1.75rem;
+	margin: 0;
+	font-size: 0.85rem;
+}
+.post-datas dt {
+	color: var(--texto-suave);
+}
+.post-datas dd {
+	margin: 0;
+	font-weight: 600;
+}
+
+.post-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem 1rem;
+	margin-top: 3rem;
+	padding-top: 1.25rem;
+	border-top: 1px solid var(--borda);
+	font-size: 0.95rem;
+}
+
+.pagina-atualizada {
+	margin-top: 2.5rem;
+	color: var(--texto-suave);
+	font-size: 0.9rem;
+}
+
+.conteudo h2 {
+	font-size: 1.5rem;
+	margin: 2.5rem 0 0.75rem;
+}
+.conteudo h3 {
+	font-size: 1.2rem;
+	margin: 2rem 0 0.5rem;
+}
+.conteudo > :first-child {
+	margin-top: 0;
+}
+.conteudo img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 8px;
+}
+.conteudo blockquote {
+	margin: 1.5rem 0;
+	padding: 0.25rem 1.25rem;
+	border-left: 4px solid var(--destaque);
+	background: var(--fundo-suave);
+	border-radius: 0 8px 8px 0;
+}
+.conteudo hr {
+	border: 0;
+	border-top: 1px solid var(--borda);
+	margin: 2.5rem 0;
+}
+.conteudo table {
+	display: block;
+	overflow-x: auto;
+	border-collapse: collapse;
+	margin: 1.5rem 0;
+	font-size: 0.95rem;
+}
+.conteudo th,
+.conteudo td {
+	padding: 0.5rem 0.75rem;
+	border: 1px solid var(--borda);
+	text-align: left;
+	vertical-align: top;
+}
+.conteudo th {
+	background: var(--fundo-suave);
+}
+
+/* ---------- Código ---------- */
+
+code {
+	font-family: var(--fonte-codigo);
+	font-size: 0.9em;
+}
+:not(pre) > code {
+	padding: 0.1em 0.35em;
+	border-radius: 4px;
+	background: var(--fundo-suave);
+	border: 1px solid var(--borda);
+}
+
+.codigo {
+	position: relative;
+	margin: 1.5rem 0;
+}
+pre.astro-code {
+	margin: 1.5rem 0;
+	padding: 1rem 1.1rem;
+	border: 1px solid var(--borda);
+	border-radius: 8px;
+	overflow-x: auto;
+	font-size: 0.875rem;
+	line-height: 1.6;
+}
+.codigo pre.astro-code {
+	margin: 0;
+}
+pre code {
+	font-size: inherit;
+}
+.copiar {
+	position: absolute;
+	top: 0.5rem;
+	right: 0.5rem;
+	padding: 0.2rem 0.6rem;
+	border: 1px solid var(--borda);
+	border-radius: 6px;
+	background: var(--fundo);
+	color: var(--texto-suave);
+	font: 600 0.75rem var(--fonte);
+	cursor: pointer;
+	opacity: 0;
+	transition: opacity 0.15s;
+}
+.codigo:hover .copiar,
+.copiar:focus-visible {
+	opacity: 1;
+}
+@media (hover: none) {
+	.copiar {
+		opacity: 1;
+	}
+}
+
+/* Realce do Shiki no tema escuro */
+:root[data-tema='escuro'] .astro-code,
+:root[data-tema='escuro'] .astro-code span {
+	color: var(--shiki-dark) !important;
+	background-color: var(--shiki-dark-bg) !important;
+	font-style: var(--shiki-dark-font-style) !important;
+	font-weight: var(--shiki-dark-font-weight) !important;
+	text-decoration: var(--shiki-dark-text-decoration) !important;
+}
+
+.diagrama {
+	margin: 1.5rem 0;
+	padding: 1rem;
+	border: 1px solid var(--borda);
+	border-radius: 8px;
+	overflow-x: auto;
+	text-align: center;
+}

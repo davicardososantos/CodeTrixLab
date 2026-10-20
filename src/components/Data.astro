@@ -1,0 +1,11 @@
+---
+import { formatarData } from '../lib/posts';
+
+interface Props {
+	data: Date;
+}
+
+const { data } = Astro.props;
+---
+
+<time datetime={data.toISOString().slice(0, 10)}>{formatarData(data)}</time>

@@ -1,0 +1,29 @@
+---
+import ListaDePosts from '../../components/ListaDePosts.astro';
+import Base from '../../layouts/Base.astro';
+import { type Post, postsPublicados, slugDaTag } from '../../lib/posts';
+
+export async function getStaticPaths() {
+	const posts = await postsPublicados();
+	const porTag = new Map<string, { nome: string; posts: Post[] }>();
+	for (const post of posts) {
+		for (const tag of post.data.tags) {
+			const slug = slugDaTag(tag);
+			const grupo = porTag.get(slug) ?? { nome: tag, posts: [] };
+			grupo.posts.push(post);
+			porTag.set(slug, grupo);
+		}
+	}
+	return [...porTag.entries()].map(([tag, grupo]) => ({ params: { tag }, props: grupo }));
+}
+
+const { nome, posts } = Astro.props as { nome: string; posts: Post[] };
+---
+
+<Base titulo={`#${nome}`} descricao={`Posts do CodeTrix Lab com a tag ${nome}.`}>
+	<header class="pagina-cabecalho">
+		<p class="post-pilar"><a href="/tags/">Tags</a></p>
+		<h1>#{nome}</h1>
+	</header>
+	<ListaDePosts posts={posts} />
+</Base>

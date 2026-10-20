@@ -1,0 +1,21 @@
+---
+import ListaDePosts from '../components/ListaDePosts.astro';
+import { SITE_DESCRICAO, SITE_TITULO } from '../consts';
+import Base from '../layouts/Base.astro';
+import { postsPublicados } from '../lib/posts';
+
+const posts = await postsPublicados();
+---
+
+<Base titulo={SITE_TITULO} descricao={SITE_DESCRICAO}>
+	<section class="abertura">
+		<h1>Caderno de estudos de IA e automação</h1>
+		<p>
+			Sou o Davi Cardoso, programador. Aqui eu publico o que estou estudando, escrito do jeito que eu mesmo entenderia
+			daqui a seis meses. Se servir para você também, ótimo.
+		</p>
+		<p><a href="/agora/">O que estou estudando agora →</a></p>
+	</section>
+
+	{posts.length > 0 ? <ListaDePosts posts={posts} /> : <p class="vazio">Os primeiros posts saem em breve.</p>}
+</Base>

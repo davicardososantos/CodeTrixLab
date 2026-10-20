@@ -1,0 +1,29 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Cabecalho from '../components/Cabecalho.astro';
+import Rodape from '../components/Rodape.astro';
+
+interface Props {
+	titulo: string;
+	descricao: string;
+	tipo?: 'website' | 'article';
+	publicado?: Date;
+}
+
+const props = Astro.props;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+	<head>
+		<BaseHead {...props} />
+	</head>
+	<body>
+		<a class="pular" href="#conteudo">Pular para o conteúdo</a>
+		<Cabecalho />
+		<main id="conteudo">
+			<slot />
+		</main>
+		<Rodape />
+	</body>
+</html>

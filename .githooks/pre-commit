@@ -1,0 +1,3 @@
+#!/bin/sh
+# Roda a verificação antes de cada commit. Para ligar: git config core.hooksPath .githooks
+npm run --silent verificar

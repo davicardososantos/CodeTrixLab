@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import { postsPublicados, slugDaTag } from '../../lib/posts';
+
+const posts = await postsPublicados();
+const tags = new Map<string, { nome: string; total: number }>();
+for (const tag of posts.flatMap((post) => post.data.tags)) {
+	const slug = slugDaTag(tag);
+	const atual = tags.get(slug);
+	tags.set(slug, { nome: atual?.nome ?? tag, total: (atual?.total ?? 0) + 1 });
+}
+const ordenadas = [...tags.entries()].sort((a, b) => a[1].nome.localeCompare(b[1].nome, 'pt-BR'));
+---
+
+<Base titulo="Tags" descricao="Todas as tags dos posts do CodeTrix Lab.">
+	<h1>Tags</h1>
+	{
+		ordenadas.length > 0 ? (
+			<ul class="lista-tags">
+				{ordenadas.map(([slug, { nome, total }]) => (
+					<li>
+						<a href={`/tags/${slug}/`}>#{nome}</a> <span class="meta">({total})</span>
+					</li>
+				))}
+			</ul>
+		) : (
+			<p class="vazio">Ainda não tem tag.</p>
+		)
+	}
+</Base>

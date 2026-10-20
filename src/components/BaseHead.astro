@@ -1,0 +1,49 @@
+---
+import '../styles/global.css';
+import { SITE_TITULO } from '../consts';
+
+interface Props {
+	titulo: string;
+	descricao: string;
+	tipo?: 'website' | 'article';
+	publicado?: Date;
+}
+
+const { titulo, descricao, tipo = 'website', publicado } = Astro.props;
+const tituloCompleto = titulo === SITE_TITULO ? titulo : `${titulo} · ${SITE_TITULO}`;
+const urlCanonica = new URL(Astro.url.pathname, Astro.site);
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>{tituloCompleto}</title>
+<meta name="description" content={descricao} />
+<link rel="canonical" href={urlCanonica} />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/favicon.png" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<link rel="alternate" type="application/rss+xml" title={SITE_TITULO} href={new URL('rss.xml', Astro.site)} />
+<meta name="generator" content={Astro.generator} />
+<meta name="theme-color" content="#1a1a1a" />
+
+<meta property="og:type" content={tipo} />
+<meta property="og:site_name" content={SITE_TITULO} />
+<meta property="og:locale" content="pt_BR" />
+<meta property="og:url" content={urlCanonica} />
+<meta property="og:title" content={titulo} />
+<meta property="og:description" content={descricao} />
+{publicado && <meta property="article:published_time" content={publicado.toISOString()} />}
+
+<!-- Aplica o tema antes de pintar a tela, para não piscar -->
+<script is:inline>
+	(() => {
+		let tema;
+		try {
+			tema = localStorage.getItem('tema');
+		} catch {}
+		if (tema !== 'claro' && tema !== 'escuro') {
+			tema = matchMedia('(prefers-color-scheme: dark)').matches ? 'escuro' : 'claro';
+		}
+		document.documentElement.dataset.tema = tema;
+	})();
+</script>

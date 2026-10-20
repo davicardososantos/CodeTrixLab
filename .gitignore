@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.wrangler/
+.env
+.env.*
+.DS_Store
+
+# Lista local de palavras proibidas: nunca vai para o GitHub
+.bloqueio.txt

@@ -1,0 +1,30 @@
+---
+// Layout das páginas fixas escritas em Markdown (Sobre, Agora)
+import Data from '../components/Data.astro';
+import Base from './Base.astro';
+
+interface Props {
+	frontmatter: {
+		titulo: string;
+		descricao: string;
+		atualizado?: string;
+	};
+}
+
+const { titulo, descricao, atualizado } = Astro.props.frontmatter;
+---
+
+<Base titulo={titulo} descricao={descricao}>
+	<article class="post">
+		<div class="conteudo">
+			<slot />
+		</div>
+		{
+			atualizado && (
+				<p class="pagina-atualizada">
+					Atualizado em <Data data={new Date(atualizado)} />.
+				</p>
+			)
+		}
+	</article>
+</Base>
