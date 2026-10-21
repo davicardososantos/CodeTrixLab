@@ -2,34 +2,36 @@
 import { PILARES } from '../consts';
 import { type Post, urlDoPost } from '../lib/posts';
 import Data from './Data.astro';
+import IconePilar from './IconePilar.astro';
 
 interface Props {
 	posts: Post[];
+	/** h2 nas páginas de lista; h3 no início, onde a seção já tem título */
+	nivel?: 'h2' | 'h3';
 }
 
-const { posts } = Astro.props;
+const { posts, nivel = 'h2' } = Astro.props;
+const Titulo = nivel;
 ---
 
 <ul class="lista-posts">
 	{
-		posts.map((post) => {
-			const pilar = PILARES[post.data.pilar];
-			return (
-				<li>
-					<h2>
-						<a href={urlDoPost(post)}>{post.data.titulo}</a>
-					</h2>
-					<p>{post.data.descricao}</p>
-					<p class="meta">
-						<Data data={post.data.publicado} />
-						<span aria-hidden="true">·</span>
-						<a href={`/pilares/${post.data.pilar}/`}>
-							{pilar.emoji} {pilar.nome}
-						</a>
-						{post.data.rascunho && <span class="selo-rascunho">rascunho</span>}
-					</p>
-				</li>
-			);
-		})
+		posts.map((post) => (
+			<li>
+				<Titulo>
+					<a href={urlDoPost(post)}>{post.data.titulo}</a>
+				</Titulo>
+				<p>{post.data.descricao}</p>
+				<p class="meta">
+					<Data data={post.data.publicado} />
+					<span aria-hidden="true">·</span>
+					<a class="meta-pilar" href={`/pilares/${post.data.pilar}/`}>
+						<IconePilar pilar={post.data.pilar} tamanho={16} />
+						{PILARES[post.data.pilar].nome}
+					</a>
+					{post.data.rascunho && <span class="selo-rascunho">rascunho</span>}
+				</p>
+			</li>
+		))
 	}
 </ul>

@@ -1,0 +1,43 @@
+---
+// Ícones de traço dos pilares: iguais em qualquer aparelho, ao contrário dos emojis
+import type { IdPilar } from '../consts';
+
+interface Props {
+	pilar: IdPilar;
+	tamanho?: number;
+}
+
+const { pilar, tamanho = 24 } = Astro.props;
+
+const desenhos: Record<IdPilar, string> = {
+	// documento com as linhas do texto: "o documento antes do código"
+	metodo:
+		'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/>',
+	// robô
+	agentes:
+		'<rect x="4" y="8" width="16" height="12" rx="3"/><path d="M12 8V5"/><circle cx="12" cy="4" r="1"/><path d="M9.5 13v1.5M14.5 13v1.5M2 13v3M22 13v3"/>',
+	// setas em ciclo
+	automacao:
+		'<path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/>',
+	// nuvem
+	nuvem: '<path d="M7 19a4.5 4.5 0 0 1-.6-8.96 6 6 0 0 1 11.48 1.46A3.75 3.75 0 0 1 17.25 19z"/>',
+	// cadeado
+	seguranca: '<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><path d="M12 15v2"/>',
+	// medalha
+	certificacao: '<circle cx="12" cy="9" r="6"/><path d="M8.6 13.9 7 22l5-3 5 3-1.6-8.1"/>',
+};
+---
+
+<svg
+	class="icone-pilar"
+	viewBox="0 0 24 24"
+	width={tamanho}
+	height={tamanho}
+	fill="none"
+	stroke="currentColor"
+	stroke-width="1.75"
+	stroke-linecap="round"
+	stroke-linejoin="round"
+	aria-hidden="true"
+	set:html={desenhos[pilar]}
+/>

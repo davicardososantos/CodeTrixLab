@@ -1,0 +1,33 @@
+---
+import { IDS_PILARES, PILARES } from '../consts';
+import type { Post } from '../lib/posts';
+import IconePilar from './IconePilar.astro';
+
+interface Props {
+	posts: Post[];
+	/** h2 na página dos pilares; h3 no início, onde a seção já tem título */
+	nivel?: 'h2' | 'h3';
+}
+
+const { posts, nivel = 'h2' } = Astro.props;
+const Titulo = nivel;
+const contagem = (id: string) => posts.filter((post) => post.data.pilar === id).length;
+const textoDaContagem = (total: number) => (total === 0 ? 'em breve' : total === 1 ? '1 post' : `${total} posts`);
+---
+
+<ul class="cartoes-pilares">
+	{
+		IDS_PILARES.map((id) => (
+			<li>
+				<a class="cartao-pilar" href={`/pilares/${id}/`}>
+					<span class="cartao-icone">
+						<IconePilar pilar={id} />
+					</span>
+					<Titulo>{PILARES[id].nome}</Titulo>
+					<p>{PILARES[id].descricao}</p>
+					<span class="cartao-contagem">{textoDaContagem(contagem(id))}</span>
+				</a>
+			</li>
+		))
+	}
+</ul>

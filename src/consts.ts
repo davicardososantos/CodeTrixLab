@@ -10,38 +10,36 @@ export const LINKS = {
 	repositorio: 'https://github.com/davicardososantos/CodeTrixLab',
 };
 
+/** A imagem do cartão do link (LinkedIn, WhatsApp...), gerada em lib/imagem-social.ts */
+export const IMAGEM_SOCIAL = { largura: 1200, altura: 630 };
+
 export const IDS_PILARES = ['metodo', 'agentes', 'automacao', 'nuvem', 'seguranca', 'certificacao'] as const;
 export type IdPilar = (typeof IDS_PILARES)[number];
 
-export const PILARES: Record<IdPilar, { nome: string; emoji: string; descricao: string }> = {
+// Os ícones de cada pilar ficam em components/IconePilar.astro
+export const PILARES: Record<IdPilar, { nome: string; descricao: string }> = {
 	metodo: {
 		nome: 'Método',
-		emoji: '🧭',
 		descricao: 'SDD, PRD, especificação e revisão de código com IA: o documento antes do código.',
 	},
 	agentes: {
 		nome: 'Agentes e ferramentas',
-		emoji: '🤖',
 		descricao: 'Claude Code, Codex, GitHub Copilot, MCP, skills, subagentes e computer use.',
 	},
 	automacao: {
 		nome: 'Automação na prática',
-		emoji: '🔁',
 		descricao: 'n8n, scripts, WhatsApp e vídeo programado.',
 	},
 	nuvem: {
 		nome: 'Microsoft e nuvem',
-		emoji: '☁️',
 		descricao: '.NET 10, Blazor, Azure, banco na nuvem e busca vetorial.',
 	},
 	seguranca: {
 		nome: 'Segurança',
-		emoji: '🔒',
 		descricao: 'Segredos, checklists e prompt injection: IA sem deixar a porta aberta.',
 	},
 	certificacao: {
 		nome: 'Diário de certificação',
-		emoji: '🎓',
 		descricao: 'O estudo para as provas, começando pela GH-300 (GitHub Copilot).',
 	},
 };

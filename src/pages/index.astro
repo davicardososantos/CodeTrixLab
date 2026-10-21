@@ -1,4 +1,5 @@
 ---
+import CartoesPilares from '../components/CartoesPilares.astro';
 import ListaDePosts from '../components/ListaDePosts.astro';
 import { SITE_DESCRICAO, SITE_TITULO } from '../consts';
 import Base from '../layouts/Base.astro';
@@ -9,13 +10,30 @@ const posts = await postsPublicados();
 
 <Base titulo={SITE_TITULO} descricao={SITE_DESCRICAO}>
 	<section class="abertura">
-		<h1>Caderno de estudos de IA e automação</h1>
-		<p>
-			Sou o Davi Cardoso, programador. Aqui eu publico o que estou estudando, escrito do jeito que eu mesmo entenderia
-			daqui a seis meses. Se servir para você também, ótimo.
-		</p>
-		<p><a href="/agora/">O que estou estudando agora →</a></p>
+		<h1>Caderno de estudos de <span class="destaque">IA e automação</span></h1>
+		<div class="apresentacao">
+			<img src="/img/davi-cardoso.webp" alt="Foto do Davi Cardoso" width="64" height="64" />
+			<p>
+				Sou o <a href="/sobre/">Davi Cardoso</a>, programador. Aqui eu publico o que estou estudando, do jeito que eu
+				mesmo entenderia daqui a seis meses. Se servir para você também, ótimo.
+			</p>
+		</div>
+		<p><a class="link-seta" href="/agora/">O que estou estudando agora →</a></p>
 	</section>
 
-	{posts.length > 0 ? <ListaDePosts posts={posts} /> : <p class="vazio">Os primeiros posts saem em breve.</p>}
+	<section class="secao" aria-labelledby="titulo-posts">
+		<h2 class="rotulo" id="titulo-posts">// últimos posts</h2>
+		{
+			posts.length > 0 ? (
+				<ListaDePosts posts={posts.slice(0, 10)} nivel="h3" />
+			) : (
+				<p class="vazio">O primeiro post sai em breve. Enquanto isso, estes são os assuntos do blog.</p>
+			)
+		}
+	</section>
+
+	<section class="secao" aria-labelledby="titulo-pilares">
+		<h2 class="rotulo" id="titulo-pilares">// pilares</h2>
+		<CartoesPilares posts={posts} nivel="h3" />
+	</section>
 </Base>

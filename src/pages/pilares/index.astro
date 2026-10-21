@@ -1,28 +1,16 @@
 ---
-import { IDS_PILARES, PILARES } from '../../consts';
+import CartoesPilares from '../../components/CartoesPilares.astro';
 import Base from '../../layouts/Base.astro';
 import { postsPublicados } from '../../lib/posts';
 
 const posts = await postsPublicados();
-const contagem = (id: string) => posts.filter((post) => post.data.pilar === id).length;
 ---
 
 <Base titulo="Pilares" descricao="Os assuntos do CodeTrix Lab, separados em seis pilares.">
-	<h1>Pilares</h1>
-	<ul class="lista-pilares">
-		{
-			IDS_PILARES.map((id) => (
-				<li>
-					<h2>
-						<a href={`/pilares/${id}/`}>
-							{PILARES[id].emoji} {PILARES[id].nome}
-						</a>
-					</h2>
-					<p>{PILARES[id].descricao}</p>
-					<p class="meta">{contagem(id) === 1 ? '1 post' : `${contagem(id)} posts`}</p>
-				</li>
-			))
-		}
-	</ul>
-	<p><a href="/tags/">Ver todas as tags →</a></p>
+	<header class="pagina-cabecalho">
+		<p class="rotulo">// pilares</p>
+		<h1>Os assuntos do blog</h1>
+	</header>
+	<CartoesPilares posts={posts} />
+	<p class="secao"><a class="link-seta" href="/tags/">Ver todas as tags →</a></p>
 </Base>

@@ -1,5 +1,6 @@
 /* Cores da marca CodeTrix: roxo #D580FF, verde #39FF14, preto #1A1A1A.
-   No tema claro o roxo escurece para dar contraste de leitura. */
+   No tema claro o roxo escurece para dar contraste de leitura.
+   Fontes do manual da marca: Roboto (títulos em Black) e Roboto Mono, carregadas em astro.config.mjs. */
 :root {
 	--fundo: #ffffff;
 	--fundo-suave: #f6f4f9;
@@ -8,26 +9,28 @@
 	--borda: #e5e1ec;
 	--destaque: #7b2cbf;
 	--destaque-forte: #5a189a;
+	--destaque-fundo: #f3e8fc;
 	--verde: #39ff14;
 	--sinal-fundo: #1a1a1a;
 	--aviso: #fff4d6;
 	--aviso-texto: #6b4e00;
 	--sombra-foco: 0 0 0 3px color-mix(in srgb, var(--destaque) 35%, transparent);
 
-	--fonte: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-	--fonte-codigo: ui-monospace, 'Cascadia Code', 'SF Mono', Consolas, 'Liberation Mono', monospace;
-	--largura: 44rem;
+	--fonte: var(--fonte-roboto), system-ui, -apple-system, 'Segoe UI', sans-serif;
+	--fonte-codigo: var(--fonte-roboto-mono), ui-monospace, 'Cascadia Code', Consolas, monospace;
+	--largura: 46rem;
 	color-scheme: light;
 }
 
 :root[data-tema='escuro'] {
 	--fundo: #1a1a1a;
-	--fundo-suave: #242326;
+	--fundo-suave: #232225;
 	--texto: #ececec;
 	--texto-suave: #a9a3b2;
 	--borda: #35333a;
 	--destaque: #d580ff;
 	--destaque-forte: #e7b3ff;
+	--destaque-fundo: #2e2236;
 	--sinal-fundo: #000000;
 	--aviso: #3a3000;
 	--aviso-texto: #ffe08a;
@@ -38,13 +41,16 @@
 @media (prefers-color-scheme: dark) {
 	:root:not([data-tema]) {
 		--fundo: #1a1a1a;
-		--fundo-suave: #242326;
+		--fundo-suave: #232225;
 		--texto: #ececec;
 		--texto-suave: #a9a3b2;
 		--borda: #35333a;
 		--destaque: #d580ff;
 		--destaque-forte: #e7b3ff;
+		--destaque-fundo: #2e2236;
 		--sinal-fundo: #000000;
+		--aviso: #3a3000;
+		--aviso-texto: #ffe08a;
 		color-scheme: dark;
 	}
 }
@@ -67,6 +73,7 @@ body {
 	font-size: 1.0625rem;
 	line-height: 1.7;
 	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
 }
 
 .pular {
@@ -100,13 +107,38 @@ h1,
 h2,
 h3,
 h4 {
-	line-height: 1.25;
-	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 700;
 	text-wrap: balance;
 }
 h1 {
-	font-size: clamp(1.8rem, 5vw, 2.4rem);
-	margin: 0 0 0.75rem;
+	font-size: clamp(2rem, 6vw, 2.75rem);
+	font-weight: 900;
+	letter-spacing: -0.02em;
+	margin: 0 0 1rem;
+}
+
+/* O "texto tech" da marca: rótulos em mono, no formato de comentário de código */
+.rotulo {
+	margin: 0 0 1rem;
+	font-family: var(--fonte-codigo);
+	font-size: 0.85rem;
+	font-weight: 500;
+	letter-spacing: 0;
+	color: var(--destaque);
+}
+.rotulo a {
+	text-decoration: none;
+}
+.destaque {
+	color: var(--destaque);
+}
+.link-seta {
+	font-weight: 700;
+	text-decoration: none;
+}
+.link-seta:hover {
+	text-decoration: underline;
 }
 
 /* ---------- Estrutura ---------- */
@@ -126,7 +158,7 @@ main,
 	justify-content: space-between;
 	flex-wrap: wrap;
 	gap: 0.75rem 1.5rem;
-	padding-block: 1.25rem;
+	padding-block: 1.1rem;
 	border-bottom: 1px solid var(--borda);
 }
 
@@ -137,12 +169,14 @@ main,
 	color: var(--texto);
 	text-decoration: none;
 	font-size: 1.15rem;
+	white-space: nowrap;
 }
 .marca:hover {
 	color: var(--texto);
 }
 .marca strong {
 	color: var(--destaque);
+	font-weight: 900;
 }
 .marca-sinal {
 	display: inline-grid;
@@ -153,7 +187,7 @@ main,
 	color: var(--verde);
 	font-family: var(--fonte-codigo);
 	font-size: 0.85rem;
-	font-weight: 700;
+	font-weight: 500;
 }
 
 .cabecalho nav {
@@ -186,8 +220,39 @@ main,
 	border-color: var(--destaque);
 }
 
+/* No celular, cabeçalho numa linha só */
+@media (max-width: 30rem) {
+	.cabecalho {
+		flex-wrap: nowrap;
+		gap: 0.5rem;
+		padding-block: 0.85rem;
+	}
+	.marca {
+		font-size: 1rem;
+		gap: 0.45rem;
+	}
+	.marca-sinal {
+		font-size: 0.75rem;
+		padding: 0.1rem 0.35rem;
+	}
+	.cabecalho nav {
+		gap: 0.75rem;
+		font-size: 0.9rem;
+	}
+	.botao-tema {
+		width: 2rem;
+		height: 2rem;
+	}
+}
+/* Em tela muito estreita, o sinal </> sai para tudo caber */
+@media (max-width: 22.5rem) {
+	.marca-sinal {
+		display: none;
+	}
+}
+
 main {
-	padding-block: 2.5rem 3rem;
+	padding-block: 2.75rem 3.5rem;
 	min-height: 60vh;
 }
 
@@ -203,47 +268,78 @@ main {
 .rodape-links {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 1rem;
+	gap: 0.4rem 1rem;
+	font-family: var(--fonte-codigo);
+	font-size: 0.8rem;
 }
 
-/* ---------- Listas ---------- */
+/* ---------- Início ---------- */
 
 .abertura {
-	margin-bottom: 2.5rem;
+	margin-bottom: 3rem;
 }
-.abertura p {
+.apresentacao {
+	display: flex;
+	align-items: flex-start;
+	gap: 1rem;
+}
+.apresentacao img {
+	flex: none;
+	width: 64px;
+	height: 64px;
+	margin-top: 0.3rem;
+	border-radius: 50%;
+	border: 2px solid var(--destaque);
+}
+@media (max-width: 30rem) {
+	.apresentacao img {
+		width: 52px;
+		height: 52px;
+	}
+}
+.apresentacao p,
+.abertura > p {
+	margin: 0 0 1rem;
 	color: var(--texto-suave);
 	font-size: 1.1rem;
 }
 
+.secao {
+	margin-top: 3rem;
+}
+
+/* ---------- Listas ---------- */
+
 .lista-posts,
-.lista-pilares,
-.lista-tags {
+.lista-tags,
+.cartoes-pilares {
 	list-style: none;
 	padding: 0;
 	margin: 0;
 }
-.lista-posts li,
-.lista-pilares li {
+.lista-posts li {
 	padding-block: 1.25rem;
 	border-top: 1px solid var(--borda);
 }
+.lista-posts li:first-child {
+	border-top: 0;
+	padding-top: 0;
+}
 .lista-posts h2,
-.lista-pilares h2 {
-	font-size: 1.3rem;
+.lista-posts h3 {
+	font-size: 1.35rem;
 	margin: 0 0 0.35rem;
 }
 .lista-posts h2 a,
-.lista-pilares h2 a {
+.lista-posts h3 a {
 	color: var(--texto);
 	text-decoration: none;
 }
 .lista-posts h2 a:hover,
-.lista-pilares h2 a:hover {
+.lista-posts h3 a:hover {
 	color: var(--destaque);
 }
-.lista-posts p,
-.lista-pilares p {
+.lista-posts p {
 	margin: 0.25rem 0;
 }
 .lista-tags {
@@ -252,13 +348,79 @@ main {
 	gap: 0.5rem 1.25rem;
 }
 
+.cartoes-pilares {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+	gap: 0.85rem;
+}
+.cartao-pilar {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	padding: 1.1rem 1.2rem;
+	border: 1px solid var(--borda);
+	border-radius: 12px;
+	background: var(--fundo-suave);
+	color: var(--texto);
+	text-decoration: none;
+	transition:
+		border-color 0.15s,
+		transform 0.15s;
+}
+.cartao-pilar:hover {
+	color: var(--texto);
+	border-color: var(--destaque);
+	transform: translateY(-2px);
+}
+.cartao-pilar h2,
+.cartao-pilar h3 {
+	margin: 0.75rem 0 0.25rem;
+	font-size: 1.1rem;
+}
+.cartao-pilar p {
+	margin: 0 0 0.75rem;
+	color: var(--texto-suave);
+	font-size: 0.95rem;
+	line-height: 1.55;
+}
+.cartao-icone {
+	display: inline-grid;
+	place-items: center;
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 10px;
+	background: var(--destaque-fundo);
+	color: var(--destaque);
+}
+.cartao-contagem {
+	margin-top: auto;
+	font-family: var(--fonte-codigo);
+	font-size: 0.78rem;
+	color: var(--texto-suave);
+}
+@media (prefers-reduced-motion: reduce) {
+	.cartao-pilar {
+		transition: none;
+	}
+	.cartao-pilar:hover {
+		transform: none;
+	}
+}
+
 .meta {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
 	gap: 0.5rem;
 	color: var(--texto-suave);
-	font-size: 0.9rem;
+	font-family: var(--fonte-codigo);
+	font-size: 0.8rem;
+}
+.meta-pilar {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.3rem;
+	text-decoration: none;
 }
 .vazio {
 	color: var(--texto-suave);
@@ -271,7 +433,7 @@ main {
 	color: var(--aviso-texto);
 	border-radius: 4px;
 	font-size: 0.8rem;
-	font-weight: 600;
+	font-weight: 700;
 }
 .selo-rascunho {
 	padding: 0 0.4rem;
@@ -281,7 +443,22 @@ main {
 }
 
 .pagina-cabecalho {
-	margin-bottom: 1.5rem;
+	margin-bottom: 2rem;
+}
+.pagina-descricao {
+	margin: 0;
+	color: var(--texto-suave);
+	font-size: 1.1rem;
+}
+.titulo-com-icone {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+}
+.titulo-com-icone .cartao-icone {
+	width: 3rem;
+	height: 3rem;
+	flex: none;
 }
 
 /* ---------- Post ---------- */
@@ -292,11 +469,15 @@ main {
 	border-bottom: 1px solid var(--borda);
 }
 .post-pilar {
-	margin: 0 0 0.5rem;
-	font-size: 0.9rem;
-	font-weight: 600;
+	margin: 0 0 0.75rem;
+	font-family: var(--fonte-codigo);
+	font-size: 0.85rem;
+	font-weight: 500;
 }
 .post-pilar a {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
 	text-decoration: none;
 }
 .post-descricao {
@@ -313,30 +494,72 @@ main {
 }
 .post-datas dt {
 	color: var(--texto-suave);
+	font-family: var(--fonte-codigo);
+	font-size: 0.75rem;
 }
 .post-datas dd {
 	margin: 0;
-	font-weight: 600;
+	font-weight: 700;
 }
 
+.post-rodape {
+	margin-top: 3rem;
+	padding-top: 1.5rem;
+	border-top: 1px solid var(--borda);
+}
 .post-tags {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.5rem 1rem;
-	margin-top: 3rem;
-	padding-top: 1.25rem;
-	border-top: 1px solid var(--borda);
+	margin: 0 0 1.5rem;
+	font-family: var(--fonte-codigo);
+	font-size: 0.85rem;
+}
+.autor {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	padding: 1rem 1.2rem;
+	border: 1px solid var(--borda);
+	border-radius: 12px;
+	background: var(--fundo-suave);
+	color: var(--texto-suave);
+	text-decoration: none;
 	font-size: 0.95rem;
+	line-height: 1.5;
+}
+.autor:hover {
+	color: var(--texto-suave);
+	border-color: var(--destaque);
+}
+.autor img {
+	flex: none;
+	border-radius: 50%;
+	border: 2px solid var(--destaque);
+}
+.autor strong {
+	display: block;
+	color: var(--texto);
 }
 
 .pagina-atualizada {
 	margin-top: 2.5rem;
 	color: var(--texto-suave);
-	font-size: 0.9rem;
+	font-family: var(--fonte-codigo);
+	font-size: 0.8rem;
+}
+
+.foto-sobre {
+	display: block;
+	width: 144px;
+	height: 144px;
+	margin-bottom: 1.5rem;
+	border-radius: 50%;
+	border: 3px solid var(--destaque);
 }
 
 .conteudo h2 {
-	font-size: 1.5rem;
+	font-size: 1.55rem;
 	margin: 2.5rem 0 0.75rem;
 }
 .conteudo h3 {
@@ -346,7 +569,14 @@ main {
 .conteudo > :first-child {
 	margin-top: 0;
 }
-.conteudo img {
+.conteudo ul,
+.conteudo ol {
+	padding-left: 1.25rem;
+}
+.conteudo li + li {
+	margin-top: 0.35rem;
+}
+.conteudo img:not(.foto-sobre) {
 	max-width: 100%;
 	height: auto;
 	border-radius: 8px;
@@ -385,7 +615,7 @@ main {
 
 code {
 	font-family: var(--fonte-codigo);
-	font-size: 0.9em;
+	font-size: 0.88em;
 }
 :not(pre) > code {
 	padding: 0.1em 0.35em;
@@ -422,7 +652,7 @@ pre code {
 	border-radius: 6px;
 	background: var(--fundo);
 	color: var(--texto-suave);
-	font: 600 0.75rem var(--fonte);
+	font: 500 0.75rem var(--fonte-codigo);
 	cursor: pointer;
 	opacity: 0;
 	transition: opacity 0.15s;

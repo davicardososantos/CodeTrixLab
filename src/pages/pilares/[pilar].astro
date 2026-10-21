@@ -1,4 +1,5 @@
 ---
+import IconePilar from '../../components/IconePilar.astro';
 import ListaDePosts from '../../components/ListaDePosts.astro';
 import { IDS_PILARES, type IdPilar, PILARES } from '../../consts';
 import Base from '../../layouts/Base.astro';
@@ -9,15 +10,18 @@ export function getStaticPaths() {
 }
 
 const pilar = Astro.params.pilar as IdPilar;
-const { nome, emoji, descricao } = PILARES[pilar];
+const { nome, descricao } = PILARES[pilar];
 const posts = (await postsPublicados()).filter((post) => post.data.pilar === pilar);
 ---
 
 <Base titulo={nome} descricao={descricao}>
 	<header class="pagina-cabecalho">
-		<p class="post-pilar"><a href="/pilares/">Pilares</a></p>
-		<h1>{emoji} {nome}</h1>
-		<p>{descricao}</p>
+		<p class="rotulo"><a href="/pilares/">// pilares</a></p>
+		<h1 class="titulo-com-icone">
+			<span class="cartao-icone"><IconePilar pilar={pilar} tamanho={28} /></span>
+			{nome}
+		</h1>
+		<p class="pagina-descricao">{descricao}</p>
 	</header>
 	{posts.length > 0 ? <ListaDePosts posts={posts} /> : <p class="vazio">Ainda não tem post neste pilar.</p>}
 </Base>

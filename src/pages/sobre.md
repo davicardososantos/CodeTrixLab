@@ -4,6 +4,8 @@ titulo: Sobre
 descricao: Quem escreve o CodeTrix Lab e como os posts são feitos.
 ---
 
+<img class="foto-sobre" src="/img/davi-cardoso.webp" alt="Foto do Davi Cardoso" width="144" height="144" />
+
 # Sobre
 
 Sou o **Davi Cardoso**, programador. Trabalho com TI desde 2012 e com desenvolvimento desde 2019. Hoje o meu dia a dia

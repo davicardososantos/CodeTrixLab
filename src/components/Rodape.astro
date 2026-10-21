@@ -3,13 +3,12 @@ import { AUTOR, LINKS } from '../consts';
 ---
 
 <footer class="rodape">
-	<p>
-		Escrito por {AUTOR}. O código deste blog é aberto no <a href={LINKS.repositorio}>GitHub</a>.
-	</p>
+	<p>CodeTrix Lab · {AUTOR}, {new Date().getFullYear()}</p>
 	<p class="rodape-links">
 		<a href={LINKS.codetrix}>CodeTrix</a>
 		<a href={LINKS.linkedin}>LinkedIn</a>
 		<a href={LINKS.github}>GitHub</a>
 		<a href="/rss.xml">RSS</a>
+		<a href={LINKS.repositorio}>Código deste blog</a>
 	</p>
 </footer>
