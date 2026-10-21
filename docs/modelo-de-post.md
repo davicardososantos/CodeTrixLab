@@ -20,9 +20,9 @@ Regra de ouro: "se eu ler isso daqui a 6 meses, eu entendo?"
 
 A resposta vem antes da explicação.
 
-## Por que fui estudar isso
+## Por que este assunto
 
-O problema real que me levou ao assunto.
+O problema real, o projeto ou a escolha por trás do post.
 
 ## O que é
 
@@ -41,9 +41,9 @@ flowchart LR
 
 Limites, custo e segurança.
 
-## O que eu ainda não sei
+## Para se aprofundar
 
-O que ficou em aberto. Pode virar o próximo post.
+Assuntos vizinhos que valem um próximo passo. Pode virar o próximo post.
 
 ## Fontes
 

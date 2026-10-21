@@ -11,8 +11,8 @@ descricao: Quem escreve o CodeTrix Lab e como os posts são feitos.
 Sou o **Davi Cardoso**, programador. Trabalho com TI desde 2012 e com desenvolvimento desde 2019. Hoje o meu dia a dia
 é IA e automação.
 
-O **CodeTrix Lab** é o meu caderno de estudos. Quando estudo um assunto, escrevo do jeito que eu mesmo entenderia daqui
-a seis meses e publico aqui. Se servir para você também, ótimo.
+O **CodeTrix Lab** é onde eu compartilho o que sei de IA e automação: o que eu construo, como eu faço e as novidades
+que estou estudando. Sempre de um jeito simples, para quem está começando também entender. Se servir para você, ótimo.
 
 ## Como os posts são escritos
 
@@ -21,7 +21,7 @@ a seis meses e publico aqui. Se servir para você também, ótimo.
 - Todo post diz **de quando é a informação**, porque em IA tudo muda rápido.
 - Os exemplos usam dados de mentira.
 - O que é teste meu ou opinião minha está escrito assim, com data.
-- Só entra o que eu estudei. Nada do trabalho que faço para empresas ou clientes aparece aqui.
+- Só entra o que eu fiz ou estudei de verdade. Nada do trabalho que faço para empresas ou clientes aparece aqui.
 
 ## Onde mais me achar
 

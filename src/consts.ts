@@ -1,6 +1,6 @@
 export const SITE_TITULO = 'CodeTrix Lab';
 export const SITE_DESCRICAO =
-	'Caderno de estudos de IA e automação do Davi Cardoso, escrito do jeito que ele mesmo entenderia daqui a seis meses.';
+	'IA e automação na prática, explicadas de um jeito simples pelo Davi Cardoso: o que ele constrói e as novidades que está estudando.';
 export const AUTOR = 'Davi Cardoso';
 
 export const LINKS = {

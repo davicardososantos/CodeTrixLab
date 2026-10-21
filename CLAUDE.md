@@ -1,6 +1,6 @@
 # CodeTrix Lab: regras para agentes
 
-Blog estático com os estudos de IA e automação do Davi Cardoso, em `blog.codetrix.com.br`.
+Blog estático do Davi Cardoso sobre IA e automação na prática, em `blog.codetrix.com.br`.
 Astro 7 gera o site em `dist/`, e a Cloudflare (Workers com arquivos estáticos) publica.
 
 **Este repositório é público.** Tudo o que entra aqui, inclusive o histórico, fica visível para qualquer pessoa.
@@ -20,6 +20,8 @@ Astro 7 gera o site em `dist/`, e a Cloudflare (Workers com arquivos estáticos)
 ## Como escrever um post
 
 - O modelo está em `docs/modelo-de-post.md`. O esquema que vale é o de `src/content.config.ts`.
+- Tom: o post compartilha o que o autor sabe e fez, e as novidades que está estudando. O que fica em aberto entra em
+  "Para se aprofundar", como próximo passo, nunca como dúvida ou falta de conhecimento.
 - Linguagem simples: todo termo técnico é explicado na primeira vez que aparece, de preferência com uma comparação do
   dia a dia.
 - Link Markdown normal (`[texto](link)`), nunca `[[ ]]`.

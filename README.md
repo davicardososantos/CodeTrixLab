@@ -1,9 +1,10 @@
 # CodeTrix Lab
 
-Caderno de estudos de IA e automação do [Davi Cardoso](https://www.linkedin.com/in/davi-cardoso-gomes), publicado em
+Blog do [Davi Cardoso](https://www.linkedin.com/in/davi-cardoso-gomes) sobre IA e automação na prática, em
 **[blog.codetrix.com.br](https://blog.codetrix.com.br)**.
 
-Escrevo do jeito que eu mesmo entenderia daqui a seis meses. Se servir para você também, ótimo.
+Compartilho o que sei e as novidades que estou estudando, explicado de um jeito simples. Se servir para você também,
+ótimo.
 
 ## Como funciona
 
